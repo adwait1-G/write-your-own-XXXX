@@ -131,4 +131,74 @@ elfp_get_ehdr(int elfp_handle);
 void
 elfp_dump_ehdr(elfp_ehdr *ehdr);
 
+
+
+/*
+ * Parsing the Program Header Table and it's entries.
+ *
+ * 1. elfp_phdr_index: An enum which helps you understand the contents of 
+ * 			elfp_phdr structure.
+ *
+ * 2. struct elfp_phdr: Contains details of a particular Program Header.
+ *
+ * 3. struct elfp_phdr_tbl: Contains details of the complete Program Header
+ * 		Table. It is basically an array of elfp_phdr structures.
+ *
+ * 4. elfp_get_phdr_tbl: A reference to an elfp_phdr_tbl structure is returned.
+ * 		* That can be used to understand the PHT.
+ *
+ * 	@arg0: Descriptor returned by elfp_open()
+ * 	@return: Reference to elfp_phdr_tbl structure.
+ * 
+ * 5. elfp_dump_phdr_tbl: Dumps the PHT in human-readable form.
+ *	@arg0: reference to a elfp_phdr_tbl structure.
+ */
+
+enum
+{
+	ELFP_PHDR_TYPE = 0,
+	ELFP_PHDR_FLAGS,
+	
+	ELFP_PHDR_TOTAL1,
+
+	ELFP_PHDR_OFFSET = 2,
+	ELFP_PHDR_VIR_ADDR,
+	ELFP_PHDR_PHY_ADDR,
+	ELFP_PHDR_FILE_SIZE,
+	ELFP_PHDR_MEM_SIZE,
+	ELFP_PHDR_ALIGNMENT,
+
+	ELFP_PHDR_TOTAL,
+} elfp_phdr_index;
+
+
+typedef struct elfp_phdr
+{
+	unsigned long int data[ELFP_PHDR_TOTAL];
+	const char *decoded_data[ELFP_PHDR_TOTAL1];
+} elfp_phdr;
+
+typedef struct elfp_phdr_tbl
+{
+	elfp_phdr *tbl;
+	unsigned int n;
+} elfp_phdr_tbl;
+
+
+elfp_phdr_tbl*
+elfp_get_phdr_tbl(int handle);
+
+void
+elfp_dump_phdr_tbl(elfp_phdr_tbl *phdr_tbl);
+
+
+
+
+
+
+
+
+
+
+
 #endif /* _ELFP_H */

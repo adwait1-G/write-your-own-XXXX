@@ -34,6 +34,7 @@
  */
 #define ELFP_FILEPATH_SIZE	256
 #define ELFP_MAIN_VECTOR_SIZE	1000
+#define ELFP_FREE_LIST_SIZE	100
 
 /*
  * struct elfp_main: An open file's metadata.
@@ -56,6 +57,8 @@ typedef struct elfp_main
 	/* elfp_ehdr */
 	elfp_ehdr *ehdr;
 
+	/* elfp_phdr_tbl */
+	elfp_phdr_tbl *phdr_tbl;
 
 	/* Handle sent to the user */
 	int handle;
@@ -151,7 +154,7 @@ add_elfp_main(elfp_main *main);
  * @arg1: elfp_ehdr reference
  */
 void
-add_addr_to_main(elfp_main *main, elfp_ehdr *ehdr);
+add_addr_to_main(elfp_main *main, void *addr);
 
 /*
  * get_elfp_main: Returns a reference to an elfp_main structure.

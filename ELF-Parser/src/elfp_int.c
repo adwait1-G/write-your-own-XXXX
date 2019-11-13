@@ -105,16 +105,16 @@ create_elfp_main()
 	main->handle = ret;
 	
 	/* Allocate some memory to store the need-to-free addresses.
-	 * I am guessing we won't have more than 30 objects to store */
-	main->addrs = calloc(30, sizeof(void *));
+	 * I am guessing we won't have more than 100 objects to store */
+	main->addrs = calloc(ELFP_FREE_LIST_SIZE, sizeof(void *));
 
 	return main;
 }
 
 void
-add_addr_to_main(elfp_main *main, elfp_ehdr *ehdr)
+add_addr_to_main(elfp_main *main, void *addr)
 {
-	main->addrs[main->n_addrs] = ehdr;
+	main->addrs[main->n_addrs] = addr;
 	main->n_addrs += 1;
 }
 
