@@ -23,6 +23,7 @@
 #include <elf.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "include/elfp.h"
 #include "include/elfp_int.h"
