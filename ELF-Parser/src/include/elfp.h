@@ -192,6 +192,14 @@ void
 elfp_dump_phdr_tbl(elfp_phdr_tbl *phdr_tbl);
 
 
+/*
+ * Parsing the Section Header Table and the sections.
+ *
+ * 1.
+ */
+
+
+
 
 
 
